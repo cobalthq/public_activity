@@ -32,7 +32,6 @@ when :active_record
   active_record_version = ActiveRecord.version.release
 
   if active_record_version >= Gem::Version.new('6.0.0')
-    schema_path = File.expand_path('../tmp/schema.rb', File.dirname(__FILE__))
     ActiveRecord::MigrationContext.new(migrations_path, ActiveRecord::SchemaMigration).migrate
   elsif active_record_version >= Gem::Version.new('5.2.0')
     ActiveRecord::MigrationContext.new(migrations_path).migrate
@@ -96,7 +95,13 @@ when :mongoid
 when :mongo_mapper
   require 'mongo_mapper'
 
-  config = YAML.load(File.read('test/mongo_mapper.yml'))
+  # TODO: remove when no longer support 2.5.8
+  config =
+    if RUBY_VERSION >= '2.6.0'
+      YAML.safe_load(File.read('test/mongo_mapper.yml'), aliases: true)
+    else
+      YAML.safe_load(File.read('test/mongo_mapper.yml'), [], [], true)
+    end
   MongoMapper.setup(config, :test)
 
   class User
@@ -127,12 +132,8 @@ when :mongo_mapper
   end
 end
 
-class ViewSpec < MiniTest::Spec
-  if ActiveSupport.version >= Gem::Version.new('5.2.0')
-    prepend ActiveSupport::Testing::SetupAndTeardown
-  else
-    include ActiveSupport::Testing::SetupAndTeardown
-  end
+class ViewSpec < Minitest::Spec
+  prepend ActiveSupport::Testing::SetupAndTeardown
   include ActionView::TestCase::Behavior
 end
-MiniTest::Spec.register_spec_type(/Rendering$/, ViewSpec)
+Minitest::Spec.register_spec_type(/Rendering$/, ViewSpec)

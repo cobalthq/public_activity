@@ -1,16 +1,12 @@
-# PublicActivity [![Build Status](https://secure.travis-ci.org/chaps-io/public_activity.svg)](http://travis-ci.org/chaps-io/public_activity) [![Code Climate](https://codeclimate.com/github/chaps-io/public_activity.svg)](https://codeclimate.com/github/chaps-io/public_activity) [![Gem Version](https://badge.fury.io/rb/public_activity.svg)](http://badge.fury.io/rb/public_activity)
+# PublicActivity [![Code Climate](https://codeclimate.com/github/chaps-io/public_activity.svg)](https://codeclimate.com/github/chaps-io/public_activity) [![Gem Version](https://badge.fury.io/rb/public_activity.svg)](http://badge.fury.io/rb/public_activity)
 
 `public_activity` provides easy activity tracking for your **ActiveRecord**, **Mongoid 3** and **MongoMapper** models
-in Rails 5.0+. Simply put: it records what has been changed or created and gives you the ability to present those
+in Rails 6.1+. Simply put: it records what has been changed or created and gives you the ability to present those
 recorded activities to users - similarly to how GitHub does it.
-
-## Rails 7
-
-**As of version 2.0.0, public_activity also supports Rails up to 7.0.**
 
 ## Table of contents
 
-- [Rails 7](#rails-7)
+- [Ruby/Rails version support](#ruby-rails-version-support)
 - [Table of contents](#table-of-contents)
 - [Example](#example)
   - [Online demo](#online-demo)
@@ -31,15 +27,22 @@ recorded activities to users - similarly to how GitHub does it.
 - [Help](#help)
 - [License](#license)
 
+## Ruby/Rails version support
+
+Version `~> 3.0`` supports Ruby 3.0+ and Rails 6.1+. For older Ruby versions
+(≤2.7) and Rails 5.0+ you can use version `~> 2.0` until you can upgrade to
+newer versions of Ruby + Rails.
+
+Issues related to those unsupported versions of Ruby/Rails will be closed
+without resolution and PRs will not be accepted.
+
 ## Example
 
 Here is a simple example showing what this gem is about:
 
 ![Example usage](http://i.imgur.com/q0TVx.png)
 
-### Online demo
-
-You can see an actual application using this gem here: http://public-activity-example.herokuapp.com/feed
+### Demo app
 
 The source code of the demo is hosted here: https://github.com/pokonski/activity_blog
 

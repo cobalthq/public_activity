@@ -19,15 +19,16 @@ module PublicActivity
         #   end
         #
         # In controller:
-        #   User.first.activities
+        #   User.first.activities_as_owner
+        #   User.first.activities_as_recipient
         #
         def activist
           has_many :activities_as_owner,
-            :class_name => "::PublicActivity::Activity",
-            :as => :owner
+                   class_name: '::PublicActivity::Activity',
+                   as: :owner
           has_many :activities_as_recipient,
-            :class_name => "::PublicActivity::Activity",
-            :as => :recipient
+                   class_name: '::PublicActivity::Activity',
+                   as: :recipient
         end
       end
     end
